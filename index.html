@@ -1094,7 +1094,7 @@
                     <a href="#" style="color:var(--burgundy);font-size:2rem;display:none;"><i class="fab fa-twitter"></i></a>
                     <a href="#" style="color:var(--burgundy);font-size:2rem;display:none;"><i class="fab fa-whatsapp"></i></a>
                 </div>
-                  <button class="btn-primary" onclick="window.open('https://mohamedahmed8506-tech.github.io/invetion1/', '_blank');"><i class="fas fa-share"></i> مشاركة الدعوة</button>
+       <button class="btn-primary" onclick="shareInvitation()"><i class="fas fa-share"></i> مشاركة الدعوة</button>
                 <button class="btn-primary" style="background:var(--burgundy);margin-right:10px;" onclick="window.print()"><i class="fas fa-print"></i> طباعة</button>
             </div>
         </div>
@@ -1150,6 +1150,32 @@
     <!-- ============================================================ -->
     <!-- ===== JAVASCRIPT ===== -->
     <script>
+                function shareInvitation() {
+            const invitationUrl = 'https://mohamedahmed8506-tech.github.io/invetion1/';
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'دعوة خطوبة سهيلة ومحمد',
+                    text: 'شاركوا معنا دعوة الخطوبة',
+                    url: invitationUrl
+                }).catch(function() {
+                    // تم إلغاء المشاركة
+                });
+                return;
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(invitationUrl).then(function() {
+                    alert('تم نسخ رابط الدعوة بنجاح');
+                }).catch(function() {
+                    window.prompt('انسخ الرابط:', invitationUrl);
+                });
+                return;
+            }
+
+            window.prompt('انسخ الرابط:', invitationUrl);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
 
             // ---------- FLOATING LETTERS ----------
